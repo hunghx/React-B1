@@ -1,0 +1,73 @@
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+import { instance } from "../../api/instance";
+
+export const fetchAllStudent = createAsyncThunk("students/getAll", async ()=>{
+    try {
+          let response = await instance.get("students");
+    console.log(response);
+    return response.data;
+    } catch (error) {
+        console.error(error)
+    }
+  
+})
+
+export const postNewStudent = createAsyncThunk("students/add", async (newStudent)=>{
+    try {
+          let response = await instance.post("students",newStudent);
+    console.log(response);
+    return response.data;
+    } catch (error) {
+        console.error(error)
+    }
+  
+})
+
+
+const initState = {
+    data : [],
+    isLoading : false,
+    message : ""
+}
+
+
+const studentSlice = createSlice(
+    {
+        name : "student",
+        initialState: initState,
+        extraReducers: (builder)=>{
+            builder
+            .addCase(fetchAllStudent.pending,(state,action)=>{
+             // không cần phải return về 1 state mới mà chỉ cần cập nhật giá trị các thuộc tính
+             // đang gọi api
+                state.isLoading = true;
+            })
+            .addCase(fetchAllStudent.fulfilled,(state,action)=>{
+                // call api thành công
+                state.data = action.payload;
+                state.isLoading = false;
+            })
+            .addCase(fetchAllStudent.rejected,(state,action)=>{
+                // call thát bại
+                state.isLoading =false;
+            })
+            .addCase(postNewStudent.pending,(state,action)=>{
+             // không cần phải return về 1 state mới mà chỉ cần cập nhật giá trị các thuộc tính
+             // đang gọi api
+                state.isLoading = true;
+            })
+            .addCase(postNewStudent.fulfilled,(state,action)=>{
+                // call api thành công
+                // state.data.push(action.payload);
+                state.isLoading = false;
+            })
+            .addCase(postNewStudent.rejected,(state,action)=>{
+                // call thát bại
+                state.isLoading =false;
+            })
+        }
+    }
+)
+
+export default studentSlice.reducer;
