@@ -12,6 +12,16 @@ export const handleSignUp = createAsyncThunk("user/sign-up", async(data)=>{
             console.log("errr",err);
         }
 })
+export const handleEditProfile = createAsyncThunk("user/profile", async(data)=>{
+        try{
+            let response = await instance.post("auth/profile",data,{headers : {
+                "Content-Type" :"multipart/form-data",
+                "Authorization": "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJodW5naHgiLCJpYXQiOjE3MDQ1NDgwOTEsImV4cCI6MTcwNDYzNDQ5MX0.IRAjRxNcSye-y-0WhYHgIy_Hzr2abdKTs_sup9NVip2p5NvEyeUpkqIZN0PA5djRF1ESSGfk24nEoUE36qYTZw"
+            }})
+        }catch( err){
+            console.log("errr",err);
+        }
+})
 
 const initState = {
     userInfo : {},
