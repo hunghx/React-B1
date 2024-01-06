@@ -10,6 +10,7 @@ import AddStudent from './components/AddStudent'
 import EditStudent from './components/EditStudent'
 import { ClipLoader } from 'react-spinners'
 import { useSelector } from 'react-redux'
+import SignUp from './components/auth/SignUp'
 const isActiveStyle = ({ isActive }) => ({
     color: isActive ? "Yellow" : "Black",
     backgroundColor: isActive ? "red" : "white"
@@ -56,6 +57,7 @@ const Router = () => {
                 <Route path='/product/:id' element={<Profile />} />
                 <Route path='/student/add' element={<AddStudent />} />
                 <Route path='/student/edit/:id' element={<EditStudent />} />
+                <Route path='/sign-up' element={<SignUp/>}/>
                 <Route path='*' element={<NotFound />} />
             </Routes>
 

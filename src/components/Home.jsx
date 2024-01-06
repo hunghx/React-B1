@@ -33,7 +33,7 @@ const Home = () => {
   } 
 
   useEffect(()=>{
-      dispatch(fetchAllStudent())
+      // dispatch(fetchAllStudent())
   },[])
 
   return (
